@@ -356,7 +356,7 @@ class Radwa_subscriber extends uvm_subscriber #(Radwa_sequence_item);
   
   //////////////////tlm
   Radwa_sequence_item Rad_seq_item;
-  uvm_analysis_imp #(Radwa_sequence_item, Radwa_subscriber) analysis_imp_A;
+  //uvm_analysis_imp #(Radwa_sequence_item, Radwa_subscriber) analysis_imp_A;
 
 //////////////////////////////////////////////Cover Group//////////////////////////////////////////////////////
 	covergroup group1 ;
@@ -373,7 +373,7 @@ class Radwa_subscriber extends uvm_subscriber #(Radwa_sequence_item);
 	 /////////////coverage
 	 group1=new();
 	 ///////////////tlm
-	 analysis_imp_A = new("analysis_imp_A", this);
+	 //analysis_imp_A = new("analysis_imp_A", this);
   endfunction
 
 ///////////////////////////////////pure virtual function write////////////////////////////////////////////////
@@ -501,7 +501,7 @@ class Radwa_env extends uvm_env;
     function void connect_phase(uvm_phase phase);
        super.connect_phase(phase);
 	   ///////////////////tlm
-	   Rad_agent.My_analysis_port.connect(Rad_sub.analysis_imp_A);
+	   Rad_agent.My_analysis_port.connect(Rad_sub.analysis_export);
 	   Rad_agent.My_analysis_port.connect(Rad_score.in_analysis_export);
        $display("connect phase of environment");
     endfunction
