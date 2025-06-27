@@ -298,16 +298,15 @@ class Radwa_scoreboard extends uvm_scoreboard;
 				begin
 					Q_addr.push_back(in_seq.addr);
 					Q_data.push_back(in_seq.data_out);
-					$display("QQQQQQQQQQaddr ",Q_addr);
-					$display("QQQQQQQQQQdata  ",Q_data);
-					$display("QQQQQQQQQQout  ",out.num());
+					$display("Address = ",Q_addr);
+					$display("Data = ",Q_data);
+					$display("Output = ",out.num());
 					if ((Q_data.size() > 1) || (out.num() > 2))    
 					begin
 					out[Q_addr.pop_front()] = Q_data[1];
 					Q_data.pop_front();
 					end
 
-				$display("QQQQQQQQQQ", in_seq.re_en && !in_seq.wr_en);
 				
 				foreach (out[key]) begin
 					
@@ -326,11 +325,11 @@ class Radwa_scoreboard extends uvm_scoreboard;
 				begin
 					if(in[n] == out[n])
 						begin
-							$display("Done heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeere where in = %d and out = %d", in[n], out[n]);
+							$display("Done and in = %d and out = %d", in[n], out[n]);
 						end
 					else
 						begin
-							$fatal("There is an error heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeere where in = %d and out = %d", in[n], out[n]);
+							$fatal("There is an error and in = %d and out = %d", in[n], out[n]);
 							
 						end
 				end
@@ -342,7 +341,7 @@ class Radwa_scoreboard extends uvm_scoreboard;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	function void write (Radwa_sequence_item t);
-		 $display("HELLO from scoreboard");
+		 $display("Hello from scoreboard");
 	endfunction
 
 endclass
@@ -378,7 +377,7 @@ class Radwa_subscriber extends uvm_subscriber #(Radwa_sequence_item);
 
 ///////////////////////////////////pure virtual function write////////////////////////////////////////////////
   function void write(Radwa_sequence_item t);
-    $display("HI from subscriber");
+    $display("Hi from subscriber");
 	$display("The coverage = ", group1.get_inst_coverage());
 	Rad_seq_item = t;
 	group1.sample();
@@ -494,7 +493,7 @@ class Radwa_env extends uvm_env;
 	   //////////////////////////// set & get ////////////////////////////////////
 	   if(!uvm_config_db#(virtual intf)::get(this, "", "my_vif", intf1)) $fatal("Failed to get my_vif3");
 	   uvm_config_db#(virtual intf)::set(this, "Rad_agent", "my_vif", intf1);
-       $display("build phase of Radwa_env");
+       $display("build phase of environment");
     endfunction
 
 /////////////////////////////////////////////connect_phase/////////////////////////////////////////////////////
